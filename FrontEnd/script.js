@@ -30,4 +30,27 @@ fetch("http://localhost:5678/api/works")
       gallery.appendChild(figure)
     })
   })
-  
+
+  // ---- RECUPERATION ET AFFICHAGE DES FILTRES ----
+
+// On récupère les catégories depuis le serveur
+fetch("http://localhost:5678/api/categories")
+  .then(response => response.json())
+  .then(categories => {
+
+    // On sélectionne le conteneur des filtres
+    const filters = document.querySelector("#filters")
+
+    // On crée le bouton "Tous" en premier
+    const boutonTous = document.createElement("button")
+    boutonTous.textContent = "Tous"
+    boutonTous.classList.add("actif")
+    filters.appendChild(boutonTous)
+
+    // On boucle sur chaque catégorie pour créer un bouton
+    categories.forEach(categorie => {
+      const bouton = document.createElement("button")
+      bouton.textContent = categorie.name
+      filters.appendChild(bouton)
+    })
+  })
