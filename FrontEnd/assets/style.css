@@ -204,11 +204,12 @@ footer nav ul {
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
-  
+  min-width: 100px;
+   white-space: nowrap;
 }
 
 #filters button.actif {
-  width: 100px;
+ 
   background: #1D6154;
   color: white;
   border: 1px solid #1D6154;
