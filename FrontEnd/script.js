@@ -136,3 +136,31 @@ fetch("http://localhost:5678/api/categories")
       filters.appendChild(bouton)
     })
   })
+
+  // On récupère le token dans le localStorage
+const token = localStorage.getItem("token")
+
+// Si le token existe → Sophie est connectée
+if (token) {
+  // On affiche le bandeau "Mode édition"
+  const bandeau = document.querySelector("#bandeau-edition")
+  bandeau.style.display = "flex"
+
+  // On change "login" en "logout"
+  const navLogin = document.querySelector("#nav-login")
+  navLogin.textContent = "logout"
+ // Au clic sur "logout" on déconnecte Sophie
+  navLogin.addEventListener("click", () => {
+    // On supprime le token du localStorage
+    localStorage.removeItem("token")
+    // On redirige vers la page login
+    window.location.href = "login.html"
+  })
+  // On cache les filtres en mode édition
+  document.querySelector("#filters").style.display = "none"
+
+  // On affiche le bouton modifier
+  const btnModifier = document.querySelector("#btn-modifier")
+  btnModifier.style.display = "block"
+
+}

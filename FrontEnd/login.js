@@ -19,7 +19,7 @@ form.addEventListener("submit", (event) => {
   .then(data => {
     if (data.token) {
   localStorage.setItem("token", data.token)
-  window.location.href = "index.html"
+ window.location.href = "index.html"
 } else {
   alert("Email ou mot de passe incorrect !")
 }
