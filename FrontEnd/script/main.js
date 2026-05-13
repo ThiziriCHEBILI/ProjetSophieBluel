@@ -71,12 +71,42 @@ function displayFilters(categories, works) {
   })
 }
 
+function displayEditionMode() {
+  // Afficher le bandeau
+  const bandeau = document.querySelector("#bandeau-edition")
+  bandeau.style.display = "flex"
+
+  // Changer "login" en "logout"
+  const navLogin = document.querySelector("#nav-login")
+  navLogin.textContent = "logout"
+
+  // Au clic sur logout → déconnexion
+  navLogin.addEventListener("click", () => {
+    localStorage.removeItem("token")
+    window.location.href = "login.html"
+  })
+
+  // Cacher les filtres
+  document.querySelector("#filters").style.display = "none"
+
+  // Afficher le bouton modifier
+  const btnModifier = document.querySelector("#btn-modifier")
+  btnModifier.style.display = "block"
+}
+
 async function main() {
   const works = await getWorks()
   displayWorks(works)
 
   const categories = await getCategories()
   displayFilters(categories, works)
+
+
+  // Gestion du mode édition
+  const token = localStorage.getItem("token")
+  if(token) {
+    displayEditionMode()
+  }
 }
 
 document.addEventListener("DOMContentLoaded", main)
