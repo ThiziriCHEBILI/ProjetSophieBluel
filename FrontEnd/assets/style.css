@@ -49,17 +49,6 @@ table {
 }
 /** end reset css**/
 body {
-<<<<<<< HEAD
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-}
-header, main, footer {
-	max-width: 1140px;
-	margin: auto;
-}
-
-=======
   margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -68,7 +57,6 @@ main, footer, header {
   max-width: 1140px;
   margin:auto;
 }
->>>>>>> amelioration
 header {
 	display: flex;
 	justify-content: space-between;
@@ -347,9 +335,4 @@ padding: 0px;
   font-weight: 400;
   color: #000000;
   display: none;
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> amelioration
