@@ -335,4 +335,195 @@ padding: 0px;
   font-weight: 400;
   color: #000000;
   display: none;
+  
+}
+/* Backdrop */
+#backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal */
+#modal {
+  background: white;
+  border-radius: 16px;
+  width: 630px;
+}
+#modal-gallery {
+  padding-left: 105px;
+  padding-right: 105px;
+}
+
+
+
+.btn-close {
+  display: block;
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding-top: 26px;
+  padding-right: 30px;
+}
+
+#modal h3 {
+  text-align: center;
+  font-family: 'Work Sans';
+  font-size: 26px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 46px;
+  margin-top: 10px;
+}
+
+/* Bouton ajouter photo */
+#btn-add-photo {
+  display: block;
+  width: 238px;
+  margin: 50px auto;
+  background: #1D6154;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 60px;
+  padding: 10px 50px;
+  cursor: pointer;
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Vue formulaire cachée par défaut */
+#modal-form {
+  width:420px ;
+  margin-left: 105px;
+  display: none;
+}
+#modal-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 68px 0;
+}
+
+#modal-photos figure {
+  flex: 0 1 18%;
+  position: relative;
+}
+#modal-photos img {
+  width: 100%;
+ 
+  object-fit: cover;
+  display: block;
+}
+
+#modal-photos .btn-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+
+
+#form-header {
+  display: flex;
+  align-items: center;
+ 
+}
+
+#form-header h3 {
+  flex: 1;
+  text-align: center;
+ 
+}
+
+#btn-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+
+
+}
+
+#upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #E8F1F6;
+  border-radius: 5px;
+  gap: 15px;
+  width: 420px;
+  height: 170px;
+  margin-bottom: 30px;
+
+}
+
+#upload-zone .fa-image {
+  font-size: 76px;
+  color: #B9C5CC;
+}
+
+#btn-upload {
+  background: #CBD6DC;
+  color: #306685;
+  border: none;
+  border-radius: 60px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 14px;
+  width: 174px;
+  height: 36px;
+}
+
+#upload-zone p {
+  font-size: 12px;
+  color: #444;
+}
+
+#form-add {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#form-add input,
+#form-add select {
+  height: 50px;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding: 0 10px;
+}
+
+#form-add input[type="submit"] {
+  background: #A7A7A7;
+  color: white;
+  border-radius: 60px;
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 274px;
+  height: 36px;
 }

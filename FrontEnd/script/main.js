@@ -1,22 +1,5 @@
 import { fetchData } from '../api/fonction.js'
-
-async function getWorks() {
-  try {
-    const works = await fetchData("works")
-    return works
-  } catch (exception) {
-    console.error(`Error: ${exception}`)
-  }
-}
-
-async function getCategories() {
-  try {
-    const categories = await fetchData("categories")
-    return categories
-  } catch (exception) {
-    console.error(`Error: ${exception}`)
-  }
-}
+import { initModal } from './modale.js' 
 
 function createCard(work) {
   const figure = document.createElement("figure")
@@ -72,41 +55,36 @@ function displayFilters(categories, works) {
 }
 
 function displayEditionMode() {
-  // Afficher le bandeau
   const bandeau = document.querySelector("#bandeau-edition")
   bandeau.style.display = "flex"
 
-  // Changer "login" en "logout"
   const navLogin = document.querySelector("#nav-login")
   navLogin.textContent = "logout"
 
-  // Au clic sur logout → déconnexion
   navLogin.addEventListener("click", () => {
     localStorage.removeItem("token")
     window.location.href = "login.html"
   })
 
-  // Cacher les filtres
   document.querySelector("#filters").style.display = "none"
 
-  // Afficher le bouton modifier
   const btnModifier = document.querySelector("#btn-modifier")
   btnModifier.style.display = "block"
 }
 
 async function main() {
-  const works = await getWorks()
+  const works = await fetchData("works")
   displayWorks(works)
 
-  const categories = await getCategories()
+  const categories = await fetchData("categories")
   displayFilters(categories, works)
-
 
   // Gestion du mode édition
   const token = localStorage.getItem("token")
   if(token) {
     displayEditionMode()
+     initModal(works) 
   }
 }
 
-document.addEventListener("DOMContentLoaded", main)
+document.addEventListener("DOMContentLoaded", main)  
