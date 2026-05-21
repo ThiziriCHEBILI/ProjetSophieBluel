@@ -9,11 +9,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./script/main.js" type="module" defer></script>
-	<script src="./script/modale.js" type="module" defer></script>
+	<link rel="stylesheet" href="./style.css">
+    <script src="./assets/script/main.js" type="module" defer></script>
+    <script src="./assets/script/modale.js" type="module" defer></script>
 
-</head>
 <body>
 <div id="bandeau-edition">
   <i class="fa-regular fa-pen-to-square"></i> Mode édition
@@ -79,43 +78,40 @@
 </footer>
 <div id="backdrop">
   <div id="modal">
-
-    <button class="btn-close">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-	
-
-    <!-- VIEW 1 : Photo gallery -->
-    <div id="modal-gallery">
-      <h3>Galerie photo</h3>
-      <div id="modal-photos"></div>
-      <hr>
-      <button id="btn-add-photo">Ajouter une photo</button>
-    </div>
-
-    <!-- VIEW 2 : Add form -->
-<div id="modal-form">
-  <div id="form-header">
+  <div id="modal-header">
     <button id="btn-back">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
+    <button class="btn-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- VIEW 1 : Photo gallery -->
+  <div id="modal-gallery">
+    <h3>Galerie photo</h3>
+    <div id="modal-photos"></div>
+    <hr>
+    <button id="btn-add-photo">Ajouter une photo</button>
+  </div>
+
+  <!-- VIEW 2 : Add form -->
+  <div id="modal-form">
     <h3>Ajout photo</h3>
+    <div id="upload-zone">
+      <i class="fa-regular fa-image"></i>
+      <button id="btn-upload">+ Ajouter photo</button>
+      <p>jpg, png : 4mo max</p>
+    </div>
+    <form id="form-add">
+      <label for="title">Titre</label>
+      <input type="text" id="title" name="title">
+      <label for="category">Catégorie</label>
+      <select id="category" name="category"></select>
+	  <hr>
+      <input type="submit" value="Valider">
+    </form>
   </div>
-
-  <div id="upload-zone">
-    <i class="fa-regular fa-image"></i>
-    <button id="btn-upload">+ Ajouter photo</button>
-    <p>jpg, png : 4mo max</p>
-  </div>
-
-  <form id="form-add">
-    <label for="title">Titre</label>
-    <input type="text" id="title" name="title">
-    <label for="category">Catégorie</label>
-    <select id="category" name="category"></select>
-    <input type="submit" value="Valider">
-  </form>
-</div>
 </div>
 </div>
 </body>
