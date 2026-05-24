@@ -3,6 +3,7 @@ import { initModal } from "./modale.js";
 
 function createCard(work) {
   const figure = document.createElement("figure");
+  figure.dataset.id = work.id; // ajouter cette ligne
   figure.innerHTML = `
     <img src="${work.imageUrl}" alt="${work.title}">
     <figcaption>${work.title}</figcaption>
@@ -33,7 +34,6 @@ function displayWorks(works) {
 
 function displayFilters(categories, works) {
   const filters = document.querySelector("#filters");
-
   const boutonTous = document.createElement("button");
   boutonTous.textContent = "Tous";
   boutonTous.classList.add("actif");
@@ -42,7 +42,6 @@ function displayFilters(categories, works) {
     displayWorks(works);
   });
   filters.appendChild(boutonTous);
-
   categories.forEach((categorie) => {
     const bouton = createFilterButton(categorie);
     bouton.addEventListener("click", () => {
@@ -59,17 +58,13 @@ function displayFilters(categories, works) {
 function displayEditionMode() {
   const bandeau = document.querySelector("#bandeau-edition");
   bandeau.style.display = "flex";
-
   const navLogin = document.querySelector("#nav-login");
   navLogin.textContent = "logout";
-
   navLogin.addEventListener("click", () => {
     localStorage.removeItem("token");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   });
-
   document.querySelector("#filters").style.display = "none";
-
   const btnModifier = document.querySelector("#btn-modifier");
   btnModifier.style.display = "block";
 }
@@ -77,20 +72,18 @@ function displayEditionMode() {
 async function main() {
   const works = await fetchData("works");
   displayWorks(works);
-
   const categories = await fetchData("categories");
   displayFilters(categories, works);
-
-  // Gestion du mode édition
   const token = localStorage.getItem("token");
   if (token) {
-    displayEditionMode()
-    initModal(works)
+    displayEditionMode();
+    initModal(works);
   } else {
-    const navLogin = document.querySelector("#nav-login")
+    const navLogin = document.querySelector("#nav-login");
     navLogin.addEventListener("click", () => {
-      window.location.href = "login.html"
-    })
+      window.location.href = "login.html";
+    });
   }
 }
+
 document.addEventListener("DOMContentLoaded", main);

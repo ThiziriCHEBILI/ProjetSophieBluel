@@ -99,9 +99,18 @@ nav li {
 	font-size: 1.2em;
 }
 
+
 li:hover {
 	color: #B1663C;
 }
+nav a {
+  text-decoration: none;
+  color: black;
+}
+nav a:hover {
+  color: #B1663C;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -238,6 +247,10 @@ footer nav ul {
   color: #000000;
   
 }
+#header-login nav a:hover {
+  color: #000000;
+  font-weight: 700;
+}
 
 #login h2 {
   font-family: 'Syne';
@@ -361,7 +374,7 @@ padding: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 26px 30px;
+  padding: 26px 30px 10px 30px;
 }
 #modal-gallery {
   padding-left: 105px;
@@ -385,8 +398,7 @@ padding: 0px;
   font-size: 26px;
   font-weight: 400;
   color: #000000;
-  margin-bottom: 46px;
-  margin-top: 10px;
+  margin-bottom: 36px;
 }
 
 /* Bouton ajouter photo */
@@ -528,7 +540,7 @@ padding: 0px;
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 8px;
   width: 274px;
   height: 36px;
 
