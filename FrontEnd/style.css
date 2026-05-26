@@ -99,9 +99,15 @@ nav li {
 	font-size: 1.2em;
 }
 
-
 li:hover {
 	color: #B1663C;
+}
+
+#nav-login {
+  cursor: pointer;
+}
+#header-login nav li:nth-child(3) {
+  cursor: pointer;
 }
 nav a {
   text-decoration: none;
@@ -245,7 +251,6 @@ footer nav ul {
 #header-login nav li:hover {
  font-weight: 700;
   color: #000000;
-  
 }
 #header-login nav a:hover {
   color: #000000;
@@ -306,6 +311,7 @@ footer nav ul {
   color: black;
   font-size: 13px;
   margin-bottom: 335px;
+   cursor: pointer;
 }
 #login form {
   display: flex;

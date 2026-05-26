@@ -1,7 +1,7 @@
 import { fetchData } from "../../api/fonction.js";
 import { initModal } from "./modale.js";
 
-function createCard(work) {
+export function createCard(work) {
   const figure = document.createElement("figure");
   figure.dataset.id = work.id; // ajouter cette ligne
   figure.innerHTML = `
@@ -77,7 +77,7 @@ async function main() {
   const token = localStorage.getItem("token");
   if (token) {
     displayEditionMode();
-    initModal(works);
+    initModal(works, categories);
   } else {
     const navLogin = document.querySelector("#nav-login");
     navLogin.addEventListener("click", () => {
