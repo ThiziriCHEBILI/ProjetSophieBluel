@@ -10,10 +10,12 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="./style.css">
+    <!-- Scripts en module pour utiliser import/export, defer pour attendre que le DOM soit prêt -->
     <script src="./assets/script/main.js" type="module" defer></script>
     <script src="./assets/script/modale.js" type="module" defer></script>
 </head>
 <body>
+<!-- Bandeau mode édition — caché par défaut en CSS, affiché par JS si l'utilisateur est connecté -->
 <div id="bandeau-edition">
   <i class="fa-regular fa-pen-to-square"></i> Mode édition
 </div>
@@ -23,6 +25,7 @@
 		<ul>
 			<li><a href="#portfolio">projets</a></li>
 			<li><a href="#contact">contact</a></li>
+			<!-- "login" par défaut, devient "logout" si connecté via JS -->
 			<li id="nav-login">login</li>
 			<li><img src="./assets/images/instagram.png" alt="Instagram"></li>
 		</ul>
@@ -36,20 +39,22 @@
 		<article>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l'esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
 	<section id="portfolio">
 		<div id="titre-portfolio">
     <h2>Mes Projets</h2>
+    <!-- Bouton modifier — caché par défaut en CSS, affiché par JS si connecté -->
     <button id="btn-modifier">
       <i class="fa-regular fa-pen-to-square"></i> modifier
     </button>
 		</div>
 		<div id="filters">
-    <!-- les boutons seront injectés ici par JavaScript -->
+    <!-- Les boutons de filtre sont injectés dynamiquement par JS depuis l'API -->
   </div>
+		<!-- La galerie est remplie dynamiquement par JS depuis l'API -->
 		<div class="gallery">
 			
 		</div>
@@ -65,6 +70,7 @@
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
 			<input type="submit" value="Envoyer">
+			<p id="contact-message"></p>
 		</form>
 	</section>
 </main>
@@ -76,28 +82,34 @@
 		</ul>
 	</nav>
 </footer>
+<!-- ========== MODALE ========== -->
+<!-- Structure statique — affichée/cachée dynamiquement par JS -->
 <div id="backdrop">
   <div id="modal">
   <div id="modal-header">
+    <!-- Flèche retour — cachée par défaut, affichée sur la vue formulaire -->
     <button id="btn-back">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
+    <!-- Bouton fermeture modale -->
     <button class="btn-close">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
 
-  <!-- VIEW 1 : Photo gallery -->
+  <!-- VUE 1 : Galerie photo — affichée par défaut à l'ouverture -->
   <div id="modal-gallery">
     <h3>Galerie photo</h3>
+    <!-- Photos injectées dynamiquement par JS -->
     <div id="modal-photos"></div>
     <hr>
     <button id="btn-add-photo">Ajouter une photo</button>
   </div>
 
-  <!-- VIEW 2 : Add form -->
+  <!-- VUE 2 : Formulaire d'ajout — caché par défaut en CSS -->
   <div id="modal-form">
     <h3>Ajout photo</h3>
+    <!-- Zone d'upload — affiche un aperçu de l'image choisie -->
     <div id="upload-zone">
       <i class="fa-regular fa-image"></i>
       <button id="btn-upload">+ Ajouter photo</button>
@@ -107,8 +119,10 @@
       <label for="title">Titre</label>
       <input type="text" id="title" name="title">
       <label for="category">Catégorie</label>
+      <!-- Options injectées dynamiquement par JS depuis l'API -->
       <select id="category" name="category"></select>
 	  <hr>
+      <!-- Bouton désactivé par défaut, s'active quand le formulaire est valide -->
       <input type="submit" value="Valider">
 	  <p id="form-error"></p>
     </form>
