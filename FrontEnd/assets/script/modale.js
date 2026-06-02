@@ -17,6 +17,21 @@ export function initModal(works, categories) {
 
   function closeModal() {
     backdrop.style.display = "none";
+
+    inputFile = null;
+
+    const uploadZone = document.querySelector("#upload-zone");
+
+    uploadZone.innerHTML = `
+    <i class="fa-regular fa-image"></i>
+    <button id="btn-upload">+ Ajouter photo</button>
+    <p>jpg, png : 4mo max</p>
+  `;
+
+    document.querySelector("#btn-upload").addEventListener("click", () => {
+      selectImage();
+    });
+    checkForm();
   }
 
   function showFormView() {
@@ -71,6 +86,11 @@ export function initModal(works, categories) {
 
   function displayCategories() {
     const select = document.querySelector("#category");
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "";
+    select.appendChild(defaultOption);
+
     categories.forEach((categorie) => {
       const option = document.createElement("option");
       option.value = categorie.id;
@@ -97,26 +117,37 @@ export function initModal(works, categories) {
       img.style.maxWidth = "100%";
       img.style.maxHeight = "170px";
       img.style.objectFit = "contain";
+      img.style.cursor = "pointer";
+
+      img.addEventListener("click", openFilePicker);
 
       uploadZone.appendChild(img);
+      checkForm();
     });
   }
 
-  function validateForm() {
+  function openFilePicker() {
+    inputFile.click();
+  }
+
+  function checkForm() {
     const title = document.querySelector("#title").value;
     const category = document.querySelector("#category").value;
     const image = inputFile ? inputFile.files[0] : null;
+    const btnSubmit = document.querySelector("#form-add input[type='submit']");
+    const formError = document.querySelector("#form-error");
 
-    if (title === "" || category === "" || !image) {
-      alert("Veuillez remplir tous les champs !");
-      return false;
+    if (title !== "" && category !== "" && image) {
+      btnSubmit.classList.add("actif");
+      btnSubmit.disabled = false;
+      formError.textContent = "";
+    } else {
+      btnSubmit.classList.remove("actif");
+      btnSubmit.disabled = true;
+      formError.textContent = "Veuillez remplir tous les champs.";
     }
-    return true;
   }
-
   async function submitForm() {
-    if (!validateForm()) return;
-
     const token = localStorage.getItem("token");
 
     const formData = new FormData();
@@ -135,7 +166,7 @@ export function initModal(works, categories) {
     if (response.ok) {
       const newWork = await response.json();
 
-      // 1. Ajouter dans la galerie de index.html
+      // 1. Ajouter dans la galerie principale
       const gallery = document.querySelector(".gallery");
       gallery.appendChild(createCard(newWork));
 
@@ -143,25 +174,29 @@ export function initModal(works, categories) {
       works.push(newWork);
       displayModalPhotos(works);
 
-      alert("Photo ajoutée avec succès !");
-      // Réinitialiser le formulaire
+      // 3. Réinitialiser le formulaire
       document.querySelector("#title").value = "";
       document.querySelector("#category").value = "";
       inputFile = null;
 
-      // Remettre la zone d'upload comme au début
+      // 4. Remettre la zone d'upload
       document.querySelector("#upload-zone").innerHTML = `
-  <i class="fa-regular fa-image"></i>
-  <button id="btn-upload">+ Ajouter photo</button>
-  <p>jpg, png : 4mo max</p>
-`;
+      <i class="fa-regular fa-image"></i>
+      <button id="btn-upload">+ Ajouter photo</button>
+      <p>jpg, png : 4mo max</p>
+    `;
 
-      // Réenregistrer le clic sur le nouveau bouton upload
+      // 5. Réenregistrer le clic sur le nouveau bouton upload
       document.querySelector("#btn-upload").addEventListener("click", () => {
         selectImage();
       });
-    } else {
-      alert("Une erreur est survenue !");
+
+      // 6. Réinitialiser le bouton
+      const btnSubmit = document.querySelector(
+        "#form-add input[type='submit']",
+      );
+      btnSubmit.classList.remove("actif");
+      btnSubmit.disabled = true;
     }
   }
   // ========== INITIALISATION ==========
@@ -182,4 +217,8 @@ export function initModal(works, categories) {
     e.preventDefault();
     submitForm();
   });
+  const btnSubmit = document.querySelector("#form-add input[type='submit']");
+  btnSubmit.disabled = true;
+  document.querySelector("#title").addEventListener("input", checkForm);
+  document.querySelector("#category").addEventListener("change", checkForm);
 }
