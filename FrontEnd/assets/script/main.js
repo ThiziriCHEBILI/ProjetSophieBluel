@@ -95,6 +95,7 @@ function validateContact() {
     } else {
       contactMessage.style.color = "green";
       contactMessage.textContent = "Message envoyé !";
+      form.reset();
     }
   });
 }
