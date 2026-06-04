@@ -18,9 +18,9 @@ async function login() {
         localStorage.setItem("token", response.token);
         window.location.href = "index.html";
       }
-    } else {
-      alert("Email ou mot de passe incorrect !");
-    }
+   } else {
+  document.querySelector("#error-message").style.color = "red";
+} 
   } catch (exception) {
     console.error(`Error: ${exception}`);
   }

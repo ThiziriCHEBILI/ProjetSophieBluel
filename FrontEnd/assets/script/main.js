@@ -17,13 +17,7 @@ function createFilterButton(categorie) {
   button.textContent = categorie.name;
   return button;
 }
-// Met en surbrillance le bouton de filtre actif
-function setActiveButton(bouton) {
-  document.querySelectorAll("#filters button").forEach((btn) => {
-    btn.classList.remove("actif");
-  });
-  bouton.classList.add("actif");
-}
+
 // Affiche les travaux dans la galerie
 function displayWorks(works) {
   const gallery = document.querySelector(".gallery");
@@ -58,6 +52,13 @@ function displayFilters(categories, works) {
     });
     filters.appendChild(bouton);
   });
+}
+// Met en surbrillance le bouton de filtre actif
+function setActiveButton(bouton) {
+  document.querySelectorAll("#filters button").forEach((btn) => {
+    btn.classList.remove("actif");
+  });
+  bouton.classList.add("actif");
 }
 // Affiche le mode édition si l'utilisateur est connecté
 function displayEditionMode() {
@@ -107,9 +108,10 @@ async function main() {
   displayWorks(works);
   const categories = await fetchData("categories");
   displayFilters(categories, works);
+
+ // Utilisateur connecté : mode édition
   const token = localStorage.getItem("token");
   if (token) {
-     // Utilisateur connecté : mode édition
     displayEditionMode();
     initModal(works, categories);
   } else {
@@ -119,6 +121,7 @@ async function main() {
       window.location.href = "login.html";
     });
   }
+
   validateContact();
 }
 // Lance la fonction principale au chargement du DOM

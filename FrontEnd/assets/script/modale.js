@@ -2,7 +2,6 @@ import { createCard } from "./main.js";
 
 // Initialise la modale avec les travaux et les catégories
 export function initModal(works, categories) {
-
   // ========== SÉLECTEURS ==========
   const backdrop = document.querySelector("#backdrop"); // Fond sombre derrière la modale
   const btnModifier = document.querySelector("#btn-modifier"); // Bouton "modifier" sur la page
@@ -23,6 +22,7 @@ export function initModal(works, categories) {
   // Ferme la modale et réinitialise la zone d'upload et le formulaire
   function closeModal() {
     backdrop.style.display = "none";
+    showGalleryView();
 
     // Réinitialise le fichier sélectionné
     inputFile = null;
@@ -55,7 +55,19 @@ export function initModal(works, categories) {
   function showGalleryView() {
     modalGallery.style.display = "block";
     modalForm.style.display = "none";
-    btnBack.style.display = "none"; // Cache le bouton retour
+    btnBack.style.display = "none";
+    document.querySelector("#form-add").reset();
+    document.querySelector("#upload-zone").innerHTML = `
+    <i class="fa-regular fa-image"></i>
+    <button id="btn-upload">+ Ajouter photo</button>
+    <p>jpg, png : 4mo max</p>
+  `;
+
+    document.querySelector("#btn-upload").addEventListener("click", () => {
+      selectImage();
+    });
+    inputFile = null;
+  
   }
 
   // Affiche les photos dans la galerie de la modale avec un bouton de suppression
@@ -156,25 +168,29 @@ export function initModal(works, categories) {
   }
 
   // Vérifie si tous les champs sont remplis et active/désactive le bouton Valider
-  function checkForm() {
-    const title = document.querySelector("#title").value;
-    const category = document.querySelector("#category").value;
-    const image = inputFile ? inputFile.files[0] : null; // Vérifie si une image est sélectionnée
-    const btnSubmit = document.querySelector("#form-add input[type='submit']");
-    const formError = document.querySelector("#form-error");
+ function checkForm() {
+  const title = document.querySelector("#title").value;
+  const category = document.querySelector("#category").value;
+  const image = inputFile ? inputFile.files[0] : null;
+  const btnSubmit = document.querySelector("#form-add input[type='submit']");
+  const formError = document.querySelector("#form-error");
 
-    if (title !== "" && category !== "" && image) {
-      // Tous les champs sont remplis : active le bouton et efface le message d'erreur
-      btnSubmit.classList.add("actif");
-      btnSubmit.disabled = false;
-      formError.textContent = "";
-    } else {
-      // Champs incomplets : désactive le bouton et affiche un message d'erreur
-      btnSubmit.classList.remove("actif");
-      btnSubmit.disabled = true;
+  if (title !== "" && category !== "" && image) {
+    btnSubmit.classList.add("actif");
+    btnSubmit.disabled = false;
+    formError.textContent = "";
+  } else {
+    btnSubmit.classList.remove("actif");
+    btnSubmit.disabled = true;
+    
+    // affiche le message seulement si l'utilisateur a commencé à remplir
+    if (title !== "" || category !== "" || image) {
       formError.textContent = "Veuillez remplir tous les champs.";
+    } else {
+      formError.textContent = "";
     }
   }
+}
 
   // Envoie le nouveau travail à l'API et met à jour le DOM
   async function submitForm() {
